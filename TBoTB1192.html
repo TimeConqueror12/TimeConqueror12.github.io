@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модпак для Minecraft 1.19.2</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --sidebar-color: #252525;
+            --accent-color: #4CAF50;
+            --text-color: #e0e0e0;
+            --card-color: #2d2d2d;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+        }
+        
+        #sidebar {
+            width: 250px;
+            background-color: var(--sidebar-color);
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        
+        #content {
+            flex: 1;
+            padding: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .sidebar-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .mod-link {
+            display: block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .mod-link:hover {
+            background-color: #3a3a3a;
+            color: var(--accent-color);
+        }
+        
+        .mod-link.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .mod-card {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: none;
+        }
+        
+        .mod-card.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .mod-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+        
+        .mod-title {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin: 0;
+        }
+        
+        .mod-version {
+            background-color: #444;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .mod-author {
+            color: #aaa;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .mod-description {
+            line-height: 1.6;
+        }
+        
+        .mod-link-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .mod-link-btn:hover {
+            background-color: #3e8e41;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #333;
+            color: white;
+        }
+        
+        .category-title {
+            margin-top: 30px;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #444;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            #sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            #content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <div class="sidebar-title">Модпак 1.19.2</div>
+        
+        <input type="text" class="search-box" placeholder="Поиск модов..." id="searchInput">
+        
+        <div class="category-title">Оптимизация</div>
+        <a href="#3d-skin-layers" class="mod-link">3d Skin Layers</a>
+        <a href="#ai-improvements" class="mod-link">AI Improvements</a>
+        <a href="#alternate-current" class="mod-link">Alternate Current</a>
+        <a href="#async-locator" class="mod-link">Async Locator</a>
+        <a href="#badoptimizations" class="mod-link">BadOptimizations</a>
+        <a href="#canary" class="mod-link">Canary</a>
+        <a href="#clumps" class="mod-link">Clumps</a>
+        <a href="#cubes-without-borders" class="mod-link">Cubes Without Borders</a>
+        <a href="#do-a-barrel-roll" class="mod-link">Do A Barrel Roll</a>
+        <a href="#doespotatotick" class="mod-link">DoesPotatoTick</a>
+        <a href="#embeddium" class="mod-link">Embeddium</a>
+        <a href="#embeddium-plus" class="mod-link">Embeddium++</a>
+        <a href="#entity-collision-fps-fix" class="mod-link">Entity Collision FPS Fix</a>
+        <a href="#fastboot" class="mod-link">FastBoot</a>
+        <a href="#fastquit" class="mod-link">FastQuit</a>
+        <a href="#ferrite-core" class="mod-link">Ferrite Core</a>
+        <a href="#ksyxis" class="mod-link">Ksyxis</a>
+        <a href="#lazydfu" class="mod-link">LazyDFU</a>
+        <a href="#lightspeed" class="mod-link">Lightspeed</a>
+        <a href="#memory-leak-fix" class="mod-link">Memory Leak Fix</a>
+        <a href="#modernfix" class="mod-link">ModernFix</a>
+        <a href="#no-unused-chunks" class="mod-link">No Unused Chunks</a>
+        <a href="#noisium" class="mod-link">Noisium</a>
+        <a href="#observable" class="mod-link">Observable</a>
+        <a href="#redirector" class="mod-link">Redirector</a>
+        <a href="#rubidium-extra" class="mod-link">Rubidium Extra</a>
+        <a href="#smooth-boot" class="mod-link">Smooth Boot</a>
+        <a href="#starlight" class="mod-link">Starlight</a>
+        <a href="#very-many-players" class="mod-link">Very Many Players</a>
+        
+        <div class="category-title">Графика</div>
+        <a href="#betterf3" class="mod-link">BetterF3</a>
+        <a href="#dynamic-lights" class="mod-link">Dynamic Lights</a>
+        <a href="#entity-model-features" class="mod-link">Entity Model Features</a>
+        <a href="#entity-texture-features" class="mod-link">Entity Texture Features</a>
+        <a href="#firstperson" class="mod-link">FirstPerson</a>
+        <a href="#full-brightness-toggle" class="mod-link">Full Brightness Toggle</a>
+        <a href="#immediatelyfast" class="mod-link">ImmediatelyFast</a>
+        <a href="#immediatelyfast-reforged" class="mod-link">ImmediatelyFast Reforged</a>
+        <a href="#no-fog" class="mod-link">No Fog</a>
+        <a href="#notenoughanimations" class="mod-link">NotEnoughAnimations</a>
+        <a href="#oculus" class="mod-link">Oculus</a>
+        <a href="#okzoomer" class="mod-link">OkZoomer</a>
+        <a href="#player-animator" class="mod-link">Player Animator</a>
+        <a href="#reforgium" class="mod-link">Reforgium</a>
+        <a href="#textrue-embeddium-options" class="mod-link">TexTrue's Embeddium Options</a>
+        
+        <div class="category-title">Игровой процесс</div>
+        <a href="#guard-villagers" class="mod-link">Guard Villagers</a>
+        <a href="#item-obliterator" class="mod-link">Item Obliterator</a>
+        <a href="#let-me-despawn" class="mod-link">Let Me Despawn</a>
+        <a href="#mouse-tweaks" class="mod-link">Mouse Tweaks</a>
+        <a href="#no-chat-reports" class="mod-link">No Chat Reports</a>
+        <a href="#sound-physics-remastered" class="mod-link">Sound Physics Remastered</a>
+        
+        <div class="category-title">Интерфейс</div>
+        <a href="#achievementoptimizer" class="mod-link">AchievementOptimizer</a>
+        <a href="#controlling" class="mod-link">Controlling</a>
+        <a href="#game-menu-mod-option" class="mod-link">Game Menu Mod Option</a>
+        <a href="#jade" class="mod-link">Jade</a>
+        <a href="#searchables" class="mod-link">Searchables</a>
+        
+        <div class="category-title">Библиотеки</div>
+        <a href="#architectury" class="mod-link">Architectury</a>
+        <a href="#balm" class="mod-link">Balm</a>
+        <a href="#bookshelf" class="mod-link">Bookshelf</a>
+        <a href="#cloth-config" class="mod-link">Cloth Config</a>
+        <a href="#collective" class="mod-link">Collective</a>
+        <a href="#corgilib" class="mod-link">CorgiLib</a>
+        <a href="#creativecore" class="mod-link">CreativeCore</a>
+        <a href="#geckolib" class="mod-link">GeckoLib</a>
+        <a href="#iceberg" class="mod-link">Iceberg</a>
+        <a href="#konkrete" class="mod-link">Konkrete</a>
+        <a href="#moonlight-library" class="mod-link">Moonlight Library</a>
+        <a href="#placebo" class="mod-link">Placebo</a>
+        <a href="#puzzles-lib" class="mod-link">Puzzles Lib</a>
+        <a href="#resourceful-lib" class="mod-link">Resourceful Lib</a>
+        <a href="#spark" class="mod-link">spark</a>
+    </div>
+    
+    <div id="content">
+        <!-- Оптимизация -->
+        <div id="3d-skin-layers" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">3d Skin Layers</h2>
+                <span class="mod-version">1.7.5</span>
+            </div>
+            <p class="mod-author">by tr7zw</p>
+            <div class="mod-description">
+                <p>Мод, который делает слой кожи игрока (например, одежду) трехмерным, как в Bedrock Edition. Улучшает визуальное восприятие без значительного влияния на производительность.</p>
+            </div>
+            <a href="https://modrinth.com/mod/zV5r3pPn" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="ai-improvements" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">AI Improvements</h2>
+                <span class="mod-version">0.5.2</span>
+            </div>
+            <p class="mod-author">by BuiltBrokenModding</p>
+            <div class="mod-description">
+                <p>Оптимизация ИИ мобов, которая уменьшает нагрузку на процессор. Моды не изменяет поведение мобов, но делает их ИИ более эффективным.</p>
+            </div>
+            <a href="https://modrinth.com/mod/DSVgwcji" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="alternate-current" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">Alternate Current</h2>
+                <span class="mod-version">1.7.0</span>
+            </div>
+            <p class="mod-author">by Space Walker</p>
+            <div class="mod-description">
+                <p>Полная переработка системы редстоуна, которая значительно улучшает производительность при работе с красной пылью. Совместим с другими модами.</p>
+            </div>
+            <a href="https://modrinth.com/mod/r0v8vy1s" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="async-locator" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">Async Locator</h2>
+                <span class="mod-version">1.3.0</span>
+            </div>
+            <p class="mod-author">by bright_spark</p>
+            <div class="mod-description">
+                <p>Делает поиск структур (например, крепостей или деревень) асинхронным, что предотвращает лаги при использовании глаз края или карт сокровищ.</p>
+            </div>
+            <a href="https://modrinth.com/mod/rkN8aqci" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="badoptimizations" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">BadOptimizations</h2>
+                <span class="mod-version">2.1.4</span>
+            </div>
+            <p class="mod-author">by Thosea</p>
+            <div class="mod-description">
+                <p>Набор микрооптимизаций, которые улучшают производительность игры без изменения геймплея. Включает оптимизацию загрузки чанков, физики и других систем.</p>
+            </div>
+            <a href="https://modrinth.com/mod/g96Z4WVZ" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="canary" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">Canary</h2>
+                <span class="mod-version">0.3.3</span>
+            </div>
+            <p class="mod-author">by AbdElAziz</p>
+            <div class="mod-description">
+                <p>Библиотека для модов, которая предоставляет различные утилиты и оптимизации. Также включает собственные улучшения производительности.</p>
+            </div>
+            <a href="https://modrinth.com/mod/qa2H4BS9" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="clumps" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">Clumps</h2>
+                <span class="mod-version">9.0.0+14</span>
+            </div>
+            <p class="mod-author">by Jaredlll08</p>
+            <div class="mod-description">
+                <p>Объединяет опыт в один шар при сборе, что уменьшает количество сущностей и улучшает производительность при фарме опыта.</p>
+            </div>
+            <a href="https://modrinth.com/mod/Wnxd13zP" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="cubes-without-borders" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">Cubes Without Borders</h2>
+                <span class="mod-version">3.0.0+mc1.19</span>
+            </div>
+            <p class="mod-author">by Kir_Antipov</p>
+            <div class="mod-description">
+                <p>Устраняет визуальные артефакты между кубами (блоками) на границах чанков, делая мир более целостным.</p>
+            </div>
+            <a href="https://modrinth.com/mod/ETlrkaYF" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="do-a-barrel-roll" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">Do A Barrel Roll</h2>
+                <span class="mod-version">2.6.2+1.19.2</span>
+            </div>
+            <p class="mod-author">by enjarai</p>
+            <div class="mod-description">
+                <p>Добавляет плавные анимации вращения для предметов в инвентаре и при броске. Чисто визуальное улучшение.</p>
+            </div>
+            <a href="https://modrinth.com/mod/6FtRfnLg" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="doespotatotick" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">DoesPotatoTick</h2>
+                <span class="mod-version">1.19.2-4.0.2</span>
+            </div>
+            <p class="mod-author">by TeamPotato</p>
+            <div class="mod-description">
+                <p>Оптимизирует тики случайных блоков, уменьшая нагрузку на процессор без заметного влияния на геймплей.</p>
+            </div>
+            <a href="https://www.curseforge.com/projects/825355" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="embeddium" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">Embeddium</h2>
+                <span class="mod-version">0.3.18.1+mc1.19.2</span>
+            </div>
+            <p class="mod-author">by embeddedt</p>
+            <div class="mod-description">
+                <p>Форк Sodium для Forge, который значительно улучшает производительность рендеринга, особенно на слабых ПК.</p>
+            </div>
+            <a href="https://modrinth.com/mod/sk9rgfiA" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+        
+        <div id="embeddium-plus" class="mod-card">
+            <div class="mod-header">
+                <h2 class="mod-title">Embeddium++</h2>
+                <span class="mod-version">1.2.13</span>
+            </div>
+            <p class="mod-author">by SrRapero720</p>
+            <div class="mod-description">
+                <p>Дополнение к Embeddium, добавляющее дополнительные оптимизации и настройки рендеринга.</p>
+            </div>
+            <a href="https://modrinth.com/mod/yD9qW65f" class="mod-link-btn" target="_blank">Страница мода</a>
+        </div>
+    <div id="entity-collision-fps-fix" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Entity Collision FPS Fix</h2>
+            <span class="mod-version">1.0.0</span>
+        </div>
+        <p class="mod-author">by Corgi Taco, jklw10</p>
+        <div class="mod-description">
+            <p>Исправляет проблему с падением FPS при столкновении множества сущностей. Особенно полезно на фермах.</p>
+        </div>
+        <a href="https://modrinth.com/mod/GiriLmaY" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="fastboot" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">FastBoot</h2>
+            <span class="mod-version">1.1</span>
+        </div>
+        <p class="mod-author">by dnlayu</p>
+        <div class="mod-description">
+            <p>Значительно ускоряет загрузку игры, оптимизируя процесс инициализации модов.</p>
+        </div>
+        <a href="https://modrinth.com/mod/nRL5uFe0" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="fastquit" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">FastQuit</h2>
+            <span class="mod-version">3.0.1+1.19.2forge</span>
+        </div>
+        <p class="mod-author">by KingContaria, Kaleb Langley</p>
+        <div class="mod-description">
+            <p>Ускоряет выход из мира, делая его асинхронным и предотвращая зависания.</p>
+        </div>
+        <a href="https://modrinth.com/mod/itFaO2Tg" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="ferrite-core" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Ferrite Core</h2>
+            <span class="mod-version">5.0.3</span>
+        </div>
+        <p class="mod-author">by malte0811</p>
+        <div class="mod-description">
+            <p>Уменьшает использование памяти за счет оптимизации хранения данных в игре.</p>
+        </div>
+        <a href="https://modrinth.com/mod/uXXizFIs" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="ksyxis" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Ksyxis</h2>
+            <span class="mod-version">1.3.3</span>
+        </div>
+        <p class="mod-author">by VidTu</p>
+        <div class="mod-description">
+            <p>Ускоряет загрузку мира, предотвращая повторную загрузку уже загруженных чанков.</p>
+        </div>
+        <a href="https://modrinth.com/mod/2ecVyZ49" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="lazydfu" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">LazyDFU</h2>
+            <span class="mod-version">0.1.3</span>
+        </div>
+        <p class="mod-author">by tuxed</p>
+        <div class="mod-description">
+            <p>Оптимизирует загрузку DataFixerUpper, ускоряя запуск игры.</p>
+        </div>
+        <a href="https://modrinth.com/mod/hvFnDODi" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="lightspeed" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Lightspeed</h2>
+            <span class="mod-version">1.19.2-1.1.0</span>
+        </div>
+        <p class="mod-author">by CCr4ft3r</p>
+        <div class="mod-description">
+            <p>Набор оптимизаций для ускорения загрузки игры и уменьшения использования памяти.</p>
+        </div>
+        <a href="https://modrinth.com/mod/US93mifm" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="memory-leak-fix" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Memory Leak Fix</h2>
+            <span class="mod-version">1.1.5</span>
+        </div>
+        <p class="mod-author">by FX - PR0CESS</p>
+        <div class="mod-description">
+            <p>Исправляет утечки памяти в Minecraft, предотвращая постепенное снижение производительности.</p>
+        </div>
+        <a href="https://modrinth.com/mod/NRjRiSSD" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="modernfix" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">ModernFix</h2>
+            <span class="mod-version">5.18.1+mc1.19.2</span>
+        </div>
+        <p class="mod-author">by embeddedt</p>
+        <div class="mod-description">
+            <p>Комплексный мод оптимизации, включающий множество исправлений и улучшений производительности.</p>
+        </div>
+        <a href="https://modrinth.com/mod/nmDcB62a" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="no-unused-chunks" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">No Unused Chunks</h2>
+            <span class="mod-version">1.3</span>
+        </div>
+        <p class="mod-author">by TheCSDev</p>
+        <div class="mod-description">
+            <p>Автоматически выгружает неиспользуемые чанки, уменьшая использование памяти.</p>
+        </div>
+        <a href="https://modrinth.com/mod/U8avpWmO" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="noisium" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Noisium</h2>
+            <span class="mod-version">1.0.2</span>
+        </div>
+        <p class="mod-author">by steveplays28</p>
+        <div class="mod-description">
+            <p>Оптимизирует генерацию шума, улучшая производительность при генерации мира.</p>
+        </div>
+        <a href="https://modrinth.com/mod/JRYQR8rr" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="observable" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Observable</h2>
+            <span class="mod-version">3.3.1</span>
+        </div>
+        <p class="mod-author">by tasgon</p>
+        <div class="mod-description">
+            <p>Инструмент для анализа производительности и поиска узких мест в работе игры.</p>
+        </div>
+        <a href="https://modrinth.com/mod/VYRu7qmG" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="redirector" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Redirector</h2>
+            <span class="mod-version">5.0.0</span>
+        </div>
+        <p class="mod-author">by TeamPotato</p>
+        <div class="mod-description">
+            <p>Оптимизирует вызовы методов в игре, уменьшая нагрузку на процессор.</p>
+        </div>
+        <a href="https://modrinth.com/mod/nzRWPE5v" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="rubidium-extra" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Rubidium Extra</h2>
+            <span class="mod-version">0.4.19+mc1.19.2-build.105</span>
+        </div>
+        <p class="mod-author">by dima_dencep, FlashyReese</p>
+        <div class="mod-description">
+            <p>Дополнение к Rubidium/Embeddium с дополнительными оптимизациями и настройками графики.</p>
+        </div>
+        <a href="https://modrinth.com/mod/oY2B1pjg" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="smooth-boot" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Smooth Boot</h2>
+            <span class="mod-version">0.0.4</span>
+        </div>
+        <p class="mod-author">by AbdElAziz</p>
+        <div class="mod-description">
+            <p>Оптимизирует процесс загрузки игры, делая его более плавным и стабильным.</p>
+        </div>
+        <a href="https://modrinth.com/mod/z53V2L4P" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="starlight" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Starlight</h2>
+            <span class="mod-version">1.1.1+forge.a3aea74</span>
+        </div>
+        <p class="mod-author">by Spottedleaf</p>
+        <div class="mod-description">
+            <p>Полностью перерабатывает систему освещения, значительно улучшая производительность.</p>
+        </div>
+        <a href="https://modrinth.com/mod/iRfIGC1s" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="very-many-players" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Very Many Players</h2>
+            <span class="mod-version">0.2.0+beta.7.35</span>
+        </div>
+        <p class="mod-author">by ishland</p>
+        <div class="mod-description">
+            <p>Оптимизирует игру для серверов с большим количеством игроков, уменьшая лаги.</p>
+        </div>
+        <a href="https://modrinth.com/mod/LlSMGYzF" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <!-- Графика -->
+    <div id="betterf3" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">BetterF3</h2>
+            <span class="mod-version">4.0.1</span>
+        </div>
+        <p class="mod-author">by TreyRuffy and cominixo</p>
+        <div class="mod-description">
+            <p>Улучшает стандартный экран отладки F3, делая его более информативным и настраиваемым.</p>
+        </div>
+        <a href="https://modrinth.com/mod/8shC1gFX" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="dynamic-lights" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Dynamic Lights</h2>
+            <span class="mod-version">1.8.6+mod</span>
+        </div>
+        <p class="mod-author">by Tschipcraft</p>
+        <div class="mod-description">
+            <p>Добавляет динамическое освещение от предметов в руках (факелы, светящийся камень и т.д.).</p>
+        </div>
+        <a href="https://modrinth.com/mod/7YjclEGc" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="entity-model-features" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Entity Model Features</h2>
+            <span class="mod-version">2.0.2</span>
+        </div>
+        <p class="mod-author">by Traben</p>
+        <div class="mod-description">
+            <p>Добавляет поддержку сложных моделей и анимаций для существ.</p>
+        </div>
+        <a href="https://modrinth.com/mod/4I1XuqiY" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="entity-texture-features" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Entity Texture Features</h2>
+            <span class="mod-version">6.0.1</span>
+        </div>
+        <p class="mod-author">by Traben</p>
+        <div class="mod-description">
+            <p>Расширяет возможности текстур существ, добавляя поддержку сложных эффектов и анимаций.</p>
+        </div>
+        <a href="https://modrinth.com/mod/BVzZfTc1" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="firstperson" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">FirstPerson</h2>
+            <span class="mod-version">2.4.9</span>
+        </div>
+        <p class="mod-author">by tr7zw</p>
+        <div class="mod-description">
+            <p>Улучшает отображение модели игрока в первом лице, делая анимации более плавными и реалистичными.</p>
+        </div>
+        <a href="https://modrinth.com/mod/H5XMjpHi" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="full-brightness-toggle" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Full Brightness Toggle</h2>
+            <span class="mod-version">4.0</span>
+        </div>
+        <p class="mod-author">by Rick South</p>
+        <div class="mod-description">
+            <p>Добавляет возможность включить максимальную яркость (как в режиме ночного видения), что полезно при строительстве в темных местах.</p>
+        </div>
+        <a href="https://modrinth.com/mod/aEK1KhsC" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="immediatelyfast" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">ImmediatelyFast</h2>
+            <span class="mod-version">1.4.0+1.19.2</span>
+        </div>
+        <p class="mod-author">by RK_01</p>
+        <div class="mod-description">
+            <p>Оптимизирует рендеринг интерфейса и некоторых других элементов, улучшая FPS.</p>
+        </div>
+        <a href="https://modrinth.com/mod/5ZwdcRci" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="immediatelyfast-reforged" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">ImmediatelyFast Reforged</h2>
+            <span class="mod-version">1.19.2-1.1.10</span>
+        </div>
+        <p class="mod-author">by CCr4ft3r (this Forge port), RaphiMC (original Fabric version)</p>
+        <div class="mod-description">
+            <p>Версия ImmediatelyFast для Forge с аналогичными оптимизациями интерфейса.</p>
+        </div>
+        <a href="https://modrinth.com/mod/ZLJD9cdi" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="no-fog" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">No Fog</h2>
+            <span class="mod-version">1.3.6+1.19.2-forge</span>
+        </div>
+        <p class="mod-author">by Virtuoel</p>
+        <div class="mod-description">
+            <p>Полностью отключает туман в игре, улучшая видимость.</p>
+        </div>
+        <a href="https://modrinth.com/mod/QSzy55SB" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="notenoughanimations" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">NotEnoughAnimations</h2>
+            <span class="mod-version">1.9.3</span>
+        </div>
+        <p class="mod-author">by tr7zw</p>
+        <div class="mod-description">
+            <p>Добавляет больше анимаций для игрока, делая движения более плавными и естественными.</p>
+        </div>
+        <a href="https://modrinth.com/mod/MPCX6s5C" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="oculus" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Oculus</h2>
+            <span class="mod-version">1.6.9a</span>
+        </div>
+        <p class="mod-author">by coderbot, IMS212, Justsnoopy30, FoundationGames</p>
+        <div class="mod-description">
+            <p>Портирует шейдеры Iris Shaders на Forge, позволяя использовать красивые шейдерные паки.</p>
+        </div>
+        <a href="https://modrinth.com/mod/GchcoXML" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="okzoomer" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">OkZoomer</h2>
+            <span class="mod-version">2.1.1</span>
+        </div>
+        <p class="mod-author">by Matyrobbrt</p>
+        <div class="mod-description">
+            <p>Улучшает зум подзорной трубы, добавляя плавность и настройки.</p>
+        </div>
+        <a href="https://www.curseforge.com/projects/631278" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="player-animator" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Player Animator</h2>
+            <span class="mod-version">1.0.2</span>
+        </div>
+        <p class="mod-author">by KosmX</p>
+        <div class="mod-description">
+            <p>Добавляет сложные анимации для игрока, делая движения более реалистичными.</p>
+        </div>
+        <a href="https://modrinth.com/mod/gedNE4y2" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="reforgium" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Reforgium</h2>
+            <span class="mod-version">1.0.12a</span>
+        </div>
+        <p class="mod-author">by comp500</p>
+        <div class="mod-description">
+            <p>Портирует оптимизации Indium на Forge, улучшая совместимость модов с шейдерами.</p>
+        </div>
+        <a href="https://modrinth.com/mod/vmn85VI7" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="textrue-embeddium-options" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">TexTrue's Embeddium Options</h2>
+            <span class="mod-version">0.1.1+mc1.19.2</span>
+        </div>
+        <p class="mod-author">by TexTrue, TexTrueStudio</p>
+        <div class="mod-description">
+            <p>Добавляет дополнительные настройки для Embeddium, позволяя точнее настроить графику.</p>
+        </div>
+        <a href="https://modrinth.com/mod/S1tndFDa" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <!-- Игровой процесс -->
+    <div id="guard-villagers" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Guard Villagers</h2>
+            <span class="mod-version">1.19.2-1.5.9</span>
+        </div>
+        <p class="mod-author">by TallestEgg, HadeZ/SadNya69 for the textures.</p>
+        <div class="mod-description">
+            <p>Добавляет стражей-жителей, которые защищают деревни от рейдов и других угроз.</p>
+        </div>
+        <a href="https://modrinth.com/mod/H1sntfo8" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="item-obliterator" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Item Obliterator</h2>
+            <span class="mod-version">2.2.1</span>
+        </div>
+        <p class="mod-author">by ElocinDev</p>
+        <div class="mod-description">
+            <p>Добавляет устройство для автоматического уничтожения ненужных предметов, предотвращая лаги от множества дропа.</p>
+        </div>
+        <a href="https://modrinth.com/mod/3ESR84kR" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="let-me-despawn" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Let Me Despawn</h2>
+            <span class="mod-version">1.3.2b</span>
+        </div>
+        <p class="mod-author">by frikinjay</p>
+        <div class="mod-description">
+            <p>Позволяет мобам деспауниться, даже если они подняли предмет, что уменьшает количество сущностей.</p>
+        </div>
+        <a href="https://modrinth.com/mod/vE2FN5qn" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="mouse-tweaks" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Mouse Tweaks</h2>
+            <span class="mod-version">2.23</span>
+        </div>
+        <p class="mod-author">by Ivan Molodetskikh (YaLTeR)</p>
+        <div class="mod-description">
+            <p>Добавляет полезные функции для управления предметами в инвентаре с помощью мыши.</p>
+        </div>
+        <a href="https://modrinth.com/mod/aC3cM3Vq" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="no-chat-reports" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">No Chat Reports</h2>
+            <span class="mod-version">1.19.2-v1.5.1</span>
+        </div>
+        <p class="mod-author">by Aizistral</p>
+        <div class="mod-description">
+            <p>Отключает систему отчетов в чате, защищая вашу приватность.</p>
+        </div>
+        <a href="https://modrinth.com/mod/qQyHxfxd" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="sound-physics-remastered" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Sound Physics Remastered</h2>
+            <span class="mod-version">1.19.2-1.4.5</span>
+        </div>
+        <p class="mod-author">by Sonic Ether, vlad2305m, Max Henkel, Saint</p>
+        <div class="mod-description">
+            <p>Добавляет реалистичную физику звука, учитывая препятствия и расстояния.</p>
+        </div>
+        <a href="https://modrinth.com/mod/qyVF9oeo" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <!-- Интерфейс -->
+    <div id="achievementoptimizer" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">AchievementOptimizer</h2>
+            <span class="mod-version">1.0.2</span>
+        </div>
+        <p class="mod-author">by Big_Energy</p>
+        <div class="mod-description">
+            <p>Оптимизирует работу с достижениями, уменьшая нагрузку на систему.</p>
+        </div>
+        <a href="https://modrinth.com/mod/SvXrP8rT" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="controlling" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Controlling</h2>
+            <span class="mod-version">10.0+7</span>
+        </div>
+        <p class="mod-author">by Jaredlll08</p>
+        <div class="mod-description">
+            <p>Улучшает экран настроек управления, добавляя поиск и фильтрацию.</p>
+        </div>
+        <a href="https://modrinth.com/mod/xv94TkTM" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="game-menu-mod-option" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Game Menu Mod Option</h2>
+            <span class="mod-version">1.18.1</span>
+        </div>
+        <p class="mod-author">by MORIMORI0317</p>
+        <div class="mod-description">
+            <p>Добавляет кнопку модов в главное меню для быстрого доступа к их настройкам.</p>
+        </div>
+        <a href="https://modrinth.com/mod/7V0nY9Tu" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="jade" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Jade</h2>
+            <span class="mod-version">8.9.2</span>
+        </div>
+        <p class="mod-author">by Snownee</p>
+        <div class="mod-description">
+            <p>Модификация Hwyla/Waila, показывающая подробную информацию о блоках и сущностях.</p>
+        </div>
+        <a href="https://modrinth.com/mod/nvQzSEkH" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="searchables" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Searchables</h2>
+            <span class="mod-version">1.0.2</span>
+        </div>
+        <p class="mod-author">by Jaredlll08</p>
+        <div class="mod-description">
+            <p>Добавляет поиск в различные меню игры (крафт, инвентарь и т.д.).</p>
+        </div>
+        <a href="https://modrinth.com/mod/fuuu3xnx" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <!-- Библиотеки -->
+    <div id="architectury" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Architectury</h2>
+            <span class="mod-version">6.6.92</span>
+        </div>
+        <p class="mod-author">by shedaniel</p>
+        <div class="mod-description">
+            <p>Библиотека для создания кроссплатформенных модов (Forge/Fabric).</p>
+        </div>
+        <a href="https://modrinth.com/mod/lhGA9TYQ" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="balm" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Balm</h2>
+            <span class="mod-version">4.6.0</span>
+        </div>
+        <p class="mod-author">by BlayTheNinth</p>
+        <div class="mod-description">
+            <p>Библиотека для упрощения разработки модов для Forge и Fabric.</p>
+        </div>
+        <a href="https://modrinth.com/mod/MBAkmtvl" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="bookshelf" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Bookshelf</h2>
+            <span class="mod-version">16.3.20</span>
+        </div>
+        <p class="mod-author">by Darkhax</p>
+        <div class="mod-description">
+            <p>Библиотека, предоставляющая общие функции для модов.</p>
+        </div>
+        <a href="https://modrinth.com/mod/uy4Cnpcm" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="cloth-config" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Cloth Config v8 API</h2>
+            <span class="mod-version">8.3.134</span>
+        </div>
+        <p class="mod-author">by shedaniel</p>
+        <div class="mod-description">
+            <p>Библиотека для создания конфигурационных меню модов.</p>
+        </div>
+        <a href="https://modrinth.com/mod/9s6osm5g" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="collective" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Collective</h2>
+            <span class="mod-version">7.64</span>
+        </div>
+        <p class="mod-author">by Rick South</p>
+        <div class="mod-description">
+            <p>Библиотека, содержащая общие функции для модов автора.</p>
+        </div>
+        <a href="https://modrinth.com/mod/e0M1UDsY" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="corgilib" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">CorgiLib</h2>
+            <span class="mod-version">1.0.0.34</span>
+        </div>
+        <p class="mod-author">by Corgi Taco</p>
+        <div class="mod-description">
+            <p>Библиотека для модов Corgi Taco.</p>
+        </div>
+        <a href="https://modrinth.com/mod/ziOp6EO8" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="creativecore" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">CreativeCore</h2>
+            <span class="mod-version">2.11.28</span>
+        </div>
+        <p class="mod-author">by CreativeMD</p>
+        <div class="mod-description">
+            <p>Библиотека для модов CreativeMD.</p>
+        </div>
+        <a href="https://modrinth.com/mod/OsZiaDHq" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="geckolib" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">GeckoLib</h2>
+            <span class="mod-version">3.1.40</span>
+        </div>
+        <p class="mod-author">by Gecko, Eliot, AzureDoom, Chappie, DerToaster</p>
+        <div class="mod-description">
+            <p>Библиотека для создания сложных 3D-анимаций сущностей и моделей в Minecraft.</p>
+        </div>
+        <a href="https://modrinth.com/mod/8BmcQJ2H" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+
+    <div id="iceberg" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Iceberg</h2>
+            <span class="mod-version">1.1.4</span>
+        </div>
+        <p class="mod-author">by Grend</p>
+        <div class="mod-description">
+            <p>Библиотека, предоставляющая дополнительные инструменты для разработчиков модов.</p>
+        </div>
+        <a href="https://modrinth.com/mod/5faXoLqX" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="konkrete" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Konkrete</h2>
+            <span class="mod-version">1.8.0</span>
+        </div>
+        <p class="mod-author">by Keksuccino</p>
+        <div class="mod-description">
+            <p>Библиотека для создания удобных интерфейсов и GUI в модах.</p>
+        </div>
+        <a href="https://modrinth.com/mod/J81TRJWm" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="moonlight-library" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Moonlight Library</h2>
+            <span class="mod-version">1.19.2-2.3.7</span>
+        </div>
+        <p class="mod-author">by MehVahdJukaar</p>
+        <div class="mod-description">
+            <p>Библиотека, используемая в нескольких модах автора, предоставляет общие функции.</p>
+        </div>
+        <a href="https://modrinth.com/mod/twkfQtEc" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="placebo" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Placebo</h2>
+            <span class="mod-version">7.3.4</span>
+        </div>
+        <p class="mod-author">by Shadows_of_Fire</p>
+        <div class="mod-description">
+            <p>Библиотека для модов, предоставляющая систему рецептов и другие утилиты.</p>
+        </div>
+        <a href="https://www.curseforge.com/projects/283644" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="puzzles-lib" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Puzzles Lib</h2>
+            <span class="mod-version">4.4.3</span>
+        </div>
+        <p class="mod-author">by Fuzs</p>
+        <div class="mod-description">
+            <p>Библиотека, используемая в модах Fuzs, содержит общие функции.</p>
+        </div>
+        <a href="https://modrinth.com/mod/QAGBst4M" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="resourceful-lib" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">Resourceful Lib</h2>
+            <span class="mod-version">1.1.24</span>
+        </div>
+        <p class="mod-author">by ThatGravyBoat</p>
+        <div class="mod-description">
+            <p>Библиотека для модов, предоставляющая инструменты для работы с ресурсами.</p>
+        </div>
+        <a href="https://modrinth.com/mod/G1hIVOrD" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+    
+    <div id="spark" class="mod-card">
+        <div class="mod-header">
+            <h2 class="mod-title">spark</h2>
+            <span class="mod-version">1.10.37</span>
+        </div>
+        <p class="mod-author">by Luck</p>
+        <div class="mod-description">
+            <p>Мощный инструмент для профилирования производительности Minecraft серверов и клиентов.</p>
+        </div>
+        <a href="https://modrinth.com/mod/l6YH9Als" class="mod-link-btn" target="_blank">Страница мода</a>
+    </div>
+</div>
+
+<script>
+    // Simple script to handle mod card navigation
+    document.addEventListener('DOMContentLoaded', function() {
+        const modLinks = document.querySelectorAll('.mod-link');
+        const modCards = document.querySelectorAll('.mod-card');
+        const searchInput = document.getElementById('searchInput');
+        
+        // Show first mod by default
+        if (modCards.length > 0) {
+            modCards[0].classList.add('active');
+            modLinks[0].classList.add('active');
+        }
+        
+        // Handle mod link clicks
+        modLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links and cards
+                modLinks.forEach(l => l.classList.remove('active'));
+                modCards.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Show corresponding card
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+        
+        // Handle search
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            modLinks.forEach(link => {
+                const linkText = link.textContent.toLowerCase();
+                if (linkText.includes(searchTerm)) {
+                    link.style.display = 'block';
+                } else {
+                    link.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+</body> </html>
